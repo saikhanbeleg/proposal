@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💖 Надтай үерхээч 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+    }
+
+    /* Subtle background pattern */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Center text */
+    .center-text {
+      position: absolute;
+      top: 20%;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      color: #ff6b9d;
+      text-shadow: 0 0 20px rgba(255, 107, 157, 0.5), 0 0 40px rgba(255, 107, 157, 0.3);
+      animation: pulseGlow 3s infinite alternate ease-in-out;
+      z-index: 2;
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      letter-spacing: 2px;
+    }
+
+    @keyframes pulseGlow {
+      from { 
+        text-shadow: 0 0 20px rgba(255, 107, 157, 0.5), 0 0 40px rgba(255, 107, 157, 0.3);
+        transform: scale(1);
+      }
+      to { 
+        text-shadow: 0 0 30px rgba(255, 20, 147, 0.8), 0 0 60px rgba(255, 107, 157, 0.5);
+        transform: scale(1.05);
+      }
+    }
+
+    /* Buttons */
+    .buttons {
+      position: absolute;
+      top: 50%;
+      display: flex;
+      gap: 30px;
+      z-index: 2;
+      transform: translateY(-50%);
+    }
+
+    .btn {
+      padding: 18px 45px;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      color: white;
+      box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-yes { 
+      background: linear-gradient(135deg, #ff6b9d, #ff8fab); 
+    }
+    .btn-no { 
+      background: linear-gradient(135deg, #ff4757, #ff6b81); 
+    }
+
+    .btn:hover { 
+      transform: translateY(-5px) scale(1.05); 
+      box-shadow: 0 12px 35px rgba(255, 107, 157, 0.6);
+    }
+
+    .btn:active { 
+      transform: translateY(-2px) scale(1.02); 
+    }
+
+    /* Hearts */
+    .celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      top: 0;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      animation: floatUp linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from { 
+        transform: translateY(100vh) rotate(0deg) scale(1); 
+        opacity: 1; 
+      }
+      to { 
+        transform: translateY(-100vh) rotate(360deg) scale(1); 
+        opacity: 0; 
+      }
+    }
+
+    /* Enhanced sad effect */
+    .sad {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(3rem, 8vw, 5rem);
+      display: none;
+      z-index: 3;
+    }
+
+    .sad.show {
+      display: block;
+      animation: shakeAndFade 2s ease-out forwards;
+    }
+
+    @keyframes shakeAndFade {
+      0% { 
+        transform: translateX(-50%) translateY(0) rotate(0deg); 
+        opacity: 1; 
+      }
+      10%, 30%, 50%, 70%, 90% { 
+        transform: translateX(-50%) translateY(-10px) rotate(5deg); 
+      }
+      20%, 40%, 60%, 80% { 
+        transform: translateX(-50%) translateY(10px) rotate(-5deg); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(0) rotate(0deg); 
+      }
+    }
+
+    /* Hide buttons after interaction */
+    .buttons.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease-out;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .btn {
+        width: 200px;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="center-text">💖 Надтай үерхээч 💖</div>
+
+  <div class="buttons" id="buttons">
+    <button class="btn btn-yes" onclick="sayYes()">Тиймээ! 💕</button>
+    <button class="btn btn-no" onclick="sayNo()">Үгүй ээ 😔</button>
+  </div>
+
+  <div class="celebration" id="celebration"></div>
+  <div class="sad" id="sad">😢</div>
+
+  <script>
+    const heartsArray = ["💖", "💘", "💝", "💗", "❤️", "💕"];
+
+    function sayYes() {
+      document.getElementById('buttons').classList.add('hidden');
+      const container = document.getElementById("celebration");
+      // Pause background interval temporarily
+      clearInterval(backgroundInterval);
+      for (let j = 0; j < 10; j++) { // 10 waves for 100 hearts total
+        setTimeout(() => { // Small delay between waves
+          for (let i = 0; i < 10; i++) { // 10 hearts per wave
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = heartsArray[Math.floor(Math.random() * heartsArray.length)];
+            heart.style.left = Math.random() * 100 + "vw";  // хаана гарч ирэх
+            heart.style.color = `hsl(${Math.random()*360}, 100%, 70%)`; // өнгө
+            heart.style.animationDuration = (2 + Math.random() * 3) + "s"; // хурд
+            heart.style.fontSize = (2 + Math.random() * 2) + "rem"; // Slightly larger for visibility
+            heart.style.zIndex = "3"; // On top
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000); // 4 секундийн дараа устгах
+          }
+        }, j * 200); // 200ms delay between waves for burst effect
+      }
+      // Restart background after explosion
+      setTimeout(() => {
+        backgroundInterval = setInterval(createBackgroundHeart, 400);
+      }, 3000);
+    }
+
+    function sayNo() {
+      const sad = document.getElementById("sad");
+      sad.classList.add('show');
+      // Optional: Shake the no button for fun
+      const noBtn = document.querySelector('.btn-no');
+      noBtn.style.animation = 'shakeAndFade 0.5s ease-out';
+    }
+
+    // Background floating hearts
+    let backgroundInterval = setInterval(createBackgroundHeart, 400);
+
+    function createBackgroundHeart() {
+      const container = document.getElementById("celebration");
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = heartsArray[Math.floor(Math.random() * heartsArray.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.color = `hsl(${Math.random()*360}, 100%, 70%)`;
+      heart.style.animationDuration = (4 + Math.random()*3) + "s";
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+  </script>
+</body>
+</html>
